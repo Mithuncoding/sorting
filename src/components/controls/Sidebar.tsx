@@ -10,13 +10,18 @@ const DATA_DISTRIBUTIONS: { label: string, value: DataDistribution }[] = [
   { label: 'Nearly Sorted', value: 'nearly_sorted' },
   { label: 'Reversed', value: 'reversed' },
   { label: 'Few Unique', value: 'few_unique' },
+  { label: 'Sawtooth 📈', value: 'sawtooth' },
+  { label: 'Sinusoidal 🌊', value: 'sinusoidal' },
+  { label: 'Bell Curve 🔔', value: 'bell_curve' },
+  { label: 'Pyramid ⛰️', value: 'pyramid' },
   { label: 'Custom Input', value: 'custom' }
 ];
 
 const VIZ_MODES: { label: string, value: VisualizationMode }[] = [
   { label: 'Bars', value: 'bars' },
   { label: 'Scatter', value: 'scatter' },
-  { label: 'Color Wheel', value: 'color' }
+  { label: 'Color', value: 'color' },
+  { label: 'Matrix', value: 'matrix' }
 ];
 
 const ALGORITHMS: SortingAlgorithm[] = [
@@ -92,12 +97,12 @@ export const Sidebar: React.FC = () => {
       {/* Visualization Mode */}
       <div className="space-y-2">
         <label className="text-sm text-gray-300">Display Mode</label>
-        <div className="grid grid-cols-3 gap-1 bg-black/40 p-1 rounded-lg border border-[--color-glass-border]">
+        <div className="grid grid-cols-4 gap-1 bg-black/40 p-1 rounded-lg border border-[--color-glass-border]">
           {VIZ_MODES.map(mode => (
             <button
               key={mode.value}
               onClick={() => store.setVisualizationMode(mode.value)}
-              className={`text-xs py-1.5 rounded-md transition-colors ${
+              className={`text-[10px] py-1.5 rounded-md transition-colors ${
                 store.visualizationMode === mode.value 
                   ? 'bg-[--color-neon-purple] text-white shadow-[0_0_10px_rgba(157,0,255,0.4)]' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -148,19 +153,33 @@ export const Sidebar: React.FC = () => {
         </div>
       )}
 
-      {/* Race Mode Toggle */}
-      <div className="flex items-center justify-between mt-2">
-        <label className="text-sm text-gray-300">Race Mode (Side-by-Side)</label>
-        <button
-          onClick={() => {
-            store.setIsRaceMode(!store.isRaceMode);
-            setTimeout(resetAnimation, 0);
-          }}
-          disabled={store.isPlaying || store.isPaused}
-          className={`w-10 h-5 rounded-full relative transition-colors ${store.isRaceMode ? 'bg-[--color-neon-cyan]' : 'bg-white/10'}`}
-        >
-          <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${store.isRaceMode ? 'translate-x-5' : 'translate-x-0'}`} />
-        </button>
+      {/* Race Mode & God Mode Toggle */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-sm text-gray-300">Race Mode (Side-by-Side)</label>
+          <button
+            onClick={() => {
+              store.setIsRaceMode(!store.isRaceMode);
+              setTimeout(resetAnimation, 0);
+            }}
+            disabled={store.isPlaying || store.isPaused}
+            className={`w-10 h-5 rounded-full relative transition-colors ${store.isRaceMode ? 'bg-[--color-neon-cyan]' : 'bg-white/10'}`}
+          >
+            <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${store.isRaceMode ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <label className="text-sm text-[--color-neon-pink] font-bold">GOD MODE ⚡</label>
+          <button
+            onClick={() => {
+              store.setIsGodMode(!store.isGodMode);
+            }}
+            className={`w-10 h-5 rounded-full relative transition-colors ${store.isGodMode ? 'bg-[--color-neon-pink] shadow-[0_0_15px_rgba(255,0,234,0.5)]' : 'bg-white/10'}`}
+          >
+            <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${store.isGodMode ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
+        </div>
       </div>
 
       {/* Algorithm Selection */}

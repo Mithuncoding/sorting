@@ -9,13 +9,17 @@ export type SortingAlgorithm =
   | 'Radix Sort'
   | 'Counting Sort';
 
-export type VisualizationMode = 'bars' | 'scatter' | 'color';
+export type VisualizationMode = 'bars' | 'scatter' | 'color' | 'matrix';
 
 export type DataDistribution = 
   | 'random' 
   | 'nearly_sorted' 
   | 'reversed' 
   | 'few_unique' 
+  | 'sawtooth'
+  | 'sinusoidal'
+  | 'bell_curve'
+  | 'pyramid'
   | 'custom';
 
 export interface ArrayElement {

@@ -1,10 +1,20 @@
 import { useEffect } from 'react';
 import { useSortingStore } from '../store/sortingStore';
-import { generateRandomArray, generateReversedArray, generateNearlySortedArray, generateFewUniqueArray, parseCustomArray } from '../utils/arrayGenerators';
+import { 
+  generateRandomArray, 
+  generateReversedArray, 
+  generateNearlySortedArray, 
+  generateFewUniqueArray, 
+  parseCustomArray,
+  generateSawtoothArray,
+  generateSinusoidalArray,
+  generateBellCurveArray,
+  generatePyramidArray
+} from '../utils/arrayGenerators';
 import type { AnimationFrame, ArrayElement } from '../types';
 import SortingWorker from '../workers/sortingWorker?worker';
 import confetti from 'canvas-confetti';
-import { playNote, mapValueToFrequency } from '../utils/sound';
+import { playNote } from '../utils/sound';
 
 // Global Singleton State for playback orchestration
 let globalWorker: Worker | null = null;
@@ -61,11 +71,13 @@ const animate = () => {
     // Play sound if enabled (only from primary to avoid chaos)
     if (store.soundEnabled && globalCurrentFrameIndex < globalAnimationFrames.length) {
       if (frame.swappingIndices.length > 0) {
-        const val = frame.array[frame.swappingIndices[0]].value;
-        playNote(mapValueToFrequency(val, 100));
+        const idx = frame.swappingIndices[0];
+        const val = frame.array[idx].value;
+        playNote(val, idx, frame.array.length);
       } else if (frame.comparingIndices.length > 0) {
-        const val = frame.array[frame.comparingIndices[0]].value;
-        playNote(mapValueToFrequency(val, 100));
+        const idx = frame.comparingIndices[0];
+        const val = frame.array[idx].value;
+        playNote(val, idx, frame.array.length);
       }
     }
 
@@ -147,6 +159,18 @@ const resetAnimation = () => {
       break;
     case 'few_unique':
       newArr = generateFewUniqueArray(currentStore.arraySize);
+      break;
+    case 'sawtooth':
+      newArr = generateSawtoothArray(currentStore.arraySize);
+      break;
+    case 'sinusoidal':
+      newArr = generateSinusoidalArray(currentStore.arraySize);
+      break;
+    case 'bell_curve':
+      newArr = generateBellCurveArray(currentStore.arraySize);
+      break;
+    case 'pyramid':
+      newArr = generatePyramidArray(currentStore.arraySize);
       break;
     case 'custom':
       newArr = parseCustomArray(currentStore.customArrayInput) || generateRandomArray(currentStore.arraySize);

@@ -56,6 +56,8 @@ interface SortingState {
   // Toggles
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
+  isGodMode: boolean;
+  setIsGodMode: (enabled: boolean) => void;
 }
 
 export const useSortingStore = create<SortingState>((set) => ({
@@ -109,5 +111,7 @@ export const useSortingStore = create<SortingState>((set) => ({
   })),
   
   soundEnabled: false,
-  setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
+  setSoundEnabled: (enabled: boolean) => set({ soundEnabled: enabled }),
+  isGodMode: false,
+  setIsGodMode: (enabled: boolean) => set({ isGodMode: enabled }),
 }));
