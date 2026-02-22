@@ -199,7 +199,7 @@ export const Sidebar: React.FC = () => {
         {(!store.isPlaying && !store.isPaused) ? (
           <button 
             onClick={startSorting}
-            className="flex items-center justify-center gap-2 bg-[--color-neon-cyan] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
+            className="flex items-center justify-center gap-2 bg-[#00f3ff] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
           >
             <Play className="w-4 h-4" /> Start Sorting
           </button>
@@ -213,7 +213,7 @@ export const Sidebar: React.FC = () => {
         ) : (
           <button 
             onClick={resumeAnimation}
-            className="flex items-center justify-center gap-2 bg-[--color-neon-cyan] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
+            className="flex items-center justify-center gap-2 bg-[#00f3ff] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
           >
             <FastForward className="w-4 h-4" /> Resume
           </button>

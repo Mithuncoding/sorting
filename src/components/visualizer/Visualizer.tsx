@@ -14,35 +14,50 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   const renderBars = () => (
     <div className="w-full flex justify-center items-end h-[80%] gap-px">
       {array.map((element) => {
-        let bgStyle = 'bg-gradient-to-t from-white/10 to-white/50 border-white/10';
-        let shadowStyle = 'none';
+        let bg = 'linear-gradient(to top, rgba(0,243,255,0.3), rgba(0,243,255,0.8))';
+        let shadow = '0 0 6px rgba(0,243,255,0.15)';
+        let borderColor = 'rgba(0,243,255,0.2)';
+        let zIdx = 1;
 
         if (element.isSorted) {
-          bgStyle = 'bg-gradient-to-t from-[#00ff88]/20 to-[#00ff88] border-[#00ff88]/50';
-          shadowStyle = '0 0 10px rgba(0,255,136,0.3)';
+          bg = 'linear-gradient(to top, rgba(0,255,136,0.2), #00ff88)';
+          shadow = '0 0 12px rgba(0,255,136,0.4)';
+          borderColor = 'rgba(0,255,136,0.5)';
         } else if (element.isSwapping) {
-          bgStyle = 'bg-gradient-to-t from-[--color-neon-pink]/40 to-[--color-neon-pink] border-[--color-neon-pink]/80 z-10';
-          shadowStyle = '0 0 20px var(--color-neon-pink)';
+          bg = 'linear-gradient(to top, rgba(255,0,234,0.4), #ff00ea)';
+          shadow = '0 0 20px #ff00ea';
+          borderColor = 'rgba(255,0,234,0.8)';
+          zIdx = 10;
         } else if (element.isComparing) {
-          bgStyle = 'bg-gradient-to-t from-[--color-neon-purple]/40 to-[--color-neon-purple] border-[--color-neon-purple]/80 z-10';
-          shadowStyle = '0 0 20px var(--color-neon-purple)';
+          bg = 'linear-gradient(to top, rgba(157,0,255,0.4), #9d00ff)';
+          shadow = '0 0 20px #9d00ff';
+          borderColor = 'rgba(157,0,255,0.8)';
+          zIdx = 10;
         }
 
         return isLargeArray ? (
           <div
             key={element.id}
-            className={`rounded-t-sm transition-colors duration-100 flex-1 mx-[0.5px] ${element.isSorted ? 'bg-[#00ff88]' : element.isSwapping ? 'bg-[--color-neon-pink]' : element.isComparing ? 'bg-[--color-neon-purple]' : 'bg-white/60'}`}
-            style={{ height: `${element.value}%` }}
+            className="rounded-t-sm transition-colors duration-100 flex-1 mx-[0.5px]"
+            style={{
+              height: `${element.value}%`,
+              backgroundColor: element.isSorted ? '#00ff88' : element.isSwapping ? '#ff00ea' : element.isComparing ? '#9d00ff' : 'rgba(0,243,255,0.7)',
+            }}
           />
         ) : (
           <motion.div
             layout
             transition={{ type: 'tween', duration: 0.15 }}
             key={element.id}
-            className={`rounded-t-md border-t border-l border-r shadow-[0_0_10px_rgba(255,255,255,0.05)] flex-1 mx-[1px] ${bgStyle}`}
+            className="rounded-t-md flex-1 mx-px"
             style={{
               height: `${element.value}%`,
-              boxShadow: shadowStyle
+              background: bg,
+              boxShadow: shadow,
+              borderTop: `1px solid ${borderColor}`,
+              borderLeft: `1px solid ${borderColor}`,
+              borderRight: `1px solid ${borderColor}`,
+              zIndex: zIdx,
             }}
           />
         );
@@ -53,8 +68,8 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   const renderScatter = () => (
     <div className="w-full h-[80%] relative flex justify-center border-b border-l border-white/10 p-4">
       {array.map((element, index) => {
-        let bgStyle = 'bg-white/60';
-        let shadowStyle = '0 0 5px rgba(255,255,255,0.2)';
+        let bgStyle = 'bg-[#00f3ff]/70';
+        let shadowStyle = '0 0 5px rgba(0,243,255,0.3)';
 
         if (element.isSorted) {
           bgStyle = 'bg-[#00ff88]';

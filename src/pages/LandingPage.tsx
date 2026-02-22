@@ -251,8 +251,8 @@ const LandingPage: React.FC = () => {
           className="flex flex-col sm:flex-row gap-4 relative z-10 w-full sm:w-auto mb-20"
         >
           <Link to="/visualizer" className="w-full sm:w-auto">
-            <button className="group relative w-full sm:w-auto px-10 py-4 bg-[--color-neon-cyan] text-[#030014] font-bold text-lg rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,243,255,0.3)] hover:shadow-[0_0_80px_rgba(0,243,255,0.5)] transition-all duration-500 transform hover:scale-[1.03] inline-flex items-center justify-center gap-3">
-              <span className="absolute inset-0 bg-linear-to-r from-[--color-neon-cyan] via-white to-[--color-neon-cyan] opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-gradient-x" />
+            <button className="group relative w-full sm:w-auto px-10 py-4 bg-[#00f3ff] text-black font-bold text-lg rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,243,255,0.3)] hover:shadow-[0_0_80px_rgba(0,243,255,0.5)] transition-all duration-500 transform hover:scale-[1.03] inline-flex items-center justify-center gap-3">
+              <span className="absolute inset-0 bg-linear-to-r from-[#00f3ff] via-white to-[#00f3ff] opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-gradient-x" />
               <span className="relative z-10 flex items-center gap-2.5">
                 Start Visualizing <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -387,13 +387,22 @@ const LandingPage: React.FC = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Ready to <span className="bg-clip-text text-transparent bg-linear-to-r from-[--color-neon-cyan] to-[--color-neon-pink]">Visualize?</span>
+            Ready to{' '}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: 'linear-gradient(to right, #00f3ff, #ff00ea)' }}
+            >
+              Visualize?
+            </span>
           </h2>
           <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
             Jump in and start exploring algorithms interactively. No signup, no setup, just pure learning.
           </p>
           <Link to="/visualizer">
-            <button className="group px-12 py-5 bg-linear-to-r from-[--color-neon-cyan] to-[--color-neon-purple] text-white font-bold text-xl rounded-2xl shadow-[0_0_60px_rgba(0,243,255,0.25)] hover:shadow-[0_0_100px_rgba(0,243,255,0.4)] transition-all duration-500 transform hover:scale-105 inline-flex items-center gap-3">
+            <button
+              className="group px-12 py-5 text-white font-bold text-xl rounded-2xl shadow-[0_0_60px_rgba(0,243,255,0.25)] hover:shadow-[0_0_100px_rgba(0,243,255,0.4)] transition-all duration-500 transform hover:scale-105 inline-flex items-center gap-3"
+              style={{ background: 'linear-gradient(to right, #00f3ff, #9d00ff)' }}
+            >
               Launch Visualizer <Play className="w-6 h-6 fill-current group-hover:scale-110 transition-transform" />
             </button>
           </Link>
