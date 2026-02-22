@@ -12,7 +12,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   const isLargeArray = arraySize > 100;
 
   const renderBars = () => (
-    <div className="w-full flex justify-center items-end h-[80%] gap-px">
+    <div className="w-full flex justify-center items-end flex-1 min-h-0 gap-px">
       {array.map((element) => {
         let bg = 'linear-gradient(to top, rgba(0,243,255,0.3), rgba(0,243,255,0.8))';
         let shadow = '0 0 6px rgba(0,243,255,0.15)';
@@ -66,7 +66,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   );
 
   const renderScatter = () => (
-    <div className="w-full h-[80%] relative flex justify-center border-b border-l border-white/10 p-4">
+    <div className="w-full flex-1 min-h-0 relative flex justify-center border-b border-l border-white/10 p-4">
       {array.map((element, index) => {
         let bgStyle = 'bg-[#00f3ff]/70';
         let shadowStyle = '0 0 5px rgba(0,243,255,0.3)';
@@ -102,7 +102,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
 
   const renderColorWheel = () => {
     return (
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full flex-1 min-h-0 flex items-center justify-center">
         <div className="relative w-full max-w-md aspect-square rounded-full flex items-center justify-center overflow-hidden border-2 border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-black/50">
            {array.map((element, index) => {
               const hue = Math.floor((element.value / 100) * 360);
@@ -139,7 +139,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
     
     return (
       <div 
-        className="w-full h-[90%] grid gap-1 p-4"
+        className="w-full flex-1 min-h-0 grid gap-1 p-4"
         style={{
           gridTemplateColumns: `repeat(${cols}, 1fr)`,
           gridTemplateRows: `repeat(${rows}, 1fr)`,
@@ -185,7 +185,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   };
 
   return (
-    <div className="flex-1 w-full h-full flex flex-col justify-end items-center px-4 pb-4 overflow-hidden relative">
+    <div className="flex-1 w-full min-h-[250px] flex flex-col justify-end items-center px-4 pb-4 overflow-hidden relative">
       {visualizationMode === 'bars' && renderBars()}
       {visualizationMode === 'scatter' && renderScatter()}
       {visualizationMode === 'color' && renderColorWheel()}
