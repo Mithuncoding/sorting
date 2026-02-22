@@ -185,7 +185,7 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
   };
 
   return (
-    <div className="flex-1 w-full min-h-[250px] flex flex-col justify-end items-center px-4 pb-4 overflow-hidden relative">
+    <div className="flex-1 w-full h-full min-h-0 flex flex-col justify-end items-center px-4 pb-4 overflow-hidden relative">
       {visualizationMode === 'bars' && renderBars()}
       {visualizationMode === 'scatter' && renderScatter()}
       {visualizationMode === 'color' && renderColorWheel()}
