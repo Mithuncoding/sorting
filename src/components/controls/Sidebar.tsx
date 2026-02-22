@@ -1,5 +1,5 @@
-import React from 'react';
-import { Play, Pause, RotateCcw, FastForward, Settings2, Volume2, VolumeX } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, Pause, RotateCcw, FastForward, Settings2, Volume2, VolumeX, ChevronDown } from 'lucide-react';
 import { initAudio } from '../../utils/sound';
 import { useSortingStore } from '../../store/sortingStore';
 import { useSorting } from '../../hooks/useSorting';
@@ -17,11 +17,11 @@ const DATA_DISTRIBUTIONS: { label: string, value: DataDistribution }[] = [
   { label: 'Custom Input', value: 'custom' }
 ];
 
-const VIZ_MODES: { label: string, value: VisualizationMode }[] = [
-  { label: 'Bars', value: 'bars' },
-  { label: 'Scatter', value: 'scatter' },
-  { label: 'Color', value: 'color' },
-  { label: 'Matrix', value: 'matrix' }
+const VIZ_MODES: { label: string, value: VisualizationMode, desc: string }[] = [
+  { label: 'Bars', value: 'bars', desc: 'Height = value' },
+  { label: 'Scatter', value: 'scatter', desc: 'X=pos, Y=value' },
+  { label: 'Color', value: 'color', desc: 'Hue = value' },
+  { label: 'Matrix', value: 'matrix', desc: '2D grid of colors' }
 ];
 
 const ALGORITHMS: SortingAlgorithm[] = [
@@ -39,24 +39,35 @@ const ALGORITHMS: SortingAlgorithm[] = [
 export const Sidebar: React.FC = () => {
   const store = useSortingStore();
   const { startSorting, pauseAnimation, resumeAnimation, resetAnimation } = useSorting();
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
-    <aside className="w-full md:w-80 glass-panel p-6 rounded-xl flex flex-col gap-6 overflow-y-auto z-10 custom-scrollbar">
-      <div className="flex items-center gap-2 mb-2">
+    <aside className="w-full md:w-80 glass-panel p-4 md:p-6 rounded-xl flex flex-col gap-6 overflow-y-auto z-10 custom-scrollbar">
+      <div className="flex items-center gap-2">
         <Settings2 className="w-5 h-5 text-[--color-neon-pink]" />
         <h2 className="text-xl font-semibold">Controls</h2>
         <button
           onClick={() => {
-            initAudio(); // need to initialize audio context on user gesture
+            initAudio();
             store.setSoundEnabled(!store.soundEnabled);
           }}
-          className="ml-auto p-2 rounded-full hover:bg-white/10 transition-colors"
+          className="ml-auto p-2 rounded-full hover:bg-white/10 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
           title="Toggle Sound"
         >
           {store.soundEnabled ? <Volume2 className="w-5 h-5 text-[--color-neon-cyan]" /> : <VolumeX className="w-5 h-5 text-gray-400" />}
         </button>
+        {/* Mobile collapse toggle */}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="md:hidden p-2 rounded-full hover:bg-white/10 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+          title="Toggle Controls"
+        >
+          <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isCollapsed ? '' : 'rotate-180'}`} />
+        </button>
       </div>
 
+      {/* Collapsible content — always visible on desktop, toggle on mobile */}
+      <div className={`flex flex-col gap-6 ${isCollapsed ? 'hidden md:flex' : 'flex'}`}>
       {/* Array Size */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
@@ -102,6 +113,7 @@ export const Sidebar: React.FC = () => {
             <button
               key={mode.value}
               onClick={() => store.setVisualizationMode(mode.value)}
+              title={mode.desc}
               className={`text-[10px] py-1.5 rounded-md transition-colors ${
                 store.visualizationMode === mode.value 
                   ? 'bg-[--color-neon-purple] text-white shadow-[0_0_10px_rgba(157,0,255,0.4)]' 
@@ -112,6 +124,9 @@ export const Sidebar: React.FC = () => {
             </button>
           ))}
         </div>
+        <p className="text-[10px] text-gray-500 italic">
+          {VIZ_MODES.find(m => m.value === store.visualizationMode)?.desc || ''}
+        </p>
       </div>
 
       {/* Data Distribution */}
@@ -218,7 +233,7 @@ export const Sidebar: React.FC = () => {
         {(!store.isPlaying && !store.isPaused) ? (
           <button 
             onClick={startSorting}
-            className="flex items-center justify-center gap-2 bg-[#00f3ff] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
+            className="flex items-center justify-center gap-2 bg-neon-cyan text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
           >
             <Play className="w-4 h-4" /> Start Sorting
           </button>
@@ -232,7 +247,7 @@ export const Sidebar: React.FC = () => {
         ) : (
           <button 
             onClick={resumeAnimation}
-            className="flex items-center justify-center gap-2 bg-[#00f3ff] text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
+            className="flex items-center justify-center gap-2 bg-neon-cyan text-black font-semibold py-2 px-4 rounded-md hover:bg-cyan-400 transition-colors col-span-2"
           >
             <FastForward className="w-4 h-4" /> Resume
           </button>
@@ -244,6 +259,7 @@ export const Sidebar: React.FC = () => {
         >
           <RotateCcw className="w-4 h-4" /> Reset Array
         </button>
+      </div>
       </div>
     </aside>
   );

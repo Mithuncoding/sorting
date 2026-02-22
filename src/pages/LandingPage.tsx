@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Play, Activity, Zap, Shield, Sparkles, ChevronRight, BarChart3, Timer, Layers, ArrowRight, Cpu, Eye } from 'lucide-react';
 import { Footer } from '../components/layout/Footer';
@@ -97,7 +97,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-[#02000a] text-white flex flex-col font-sans relative overflow-x-hidden selection:bg-[#00f3ff]/30 selection:text-white"
+      className="min-h-screen bg-[#02000a] text-white flex flex-col font-sans relative overflow-x-hidden selection:bg-neon-cyan/30 selection:text-white"
       onMouseMove={handleMouseMove}
     >
       {/* ─── DEEP SPACE BACKGROUND ─── */}
@@ -157,7 +157,7 @@ const LandingPage: React.FC = () => {
       </div>
 
       {/* Scan Lines Effect */}
-      <div className="absolute inset-0 pointer-events-none z-[1] opacity-[0.015]"
+      <div className="absolute inset-0 pointer-events-none z-1 opacity-[0.015]"
         style={{
           backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
         }}
@@ -171,12 +171,15 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00f3ff] to-[#9d00ff] flex items-center justify-center shadow-[0_0_25px_rgba(0,243,255,0.4)]">
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+            style={{ background: 'linear-gradient(to bottom right, #00f3ff, #9d00ff)', boxShadow: '0 0 25px rgba(0,243,255,0.4)' }}
+          >
             <Activity className="text-white w-6 h-6" />
           </div>
           <span className="text-xl md:text-2xl font-bold tracking-tight">
             <span className="text-white">Sort</span>
-            <span className="text-[#00f3ff]">Craft</span>
+            <span className="text-neon-cyan">Craft</span>
           </span>
         </motion.div>
 
@@ -185,7 +188,7 @@ const LandingPage: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Link to="/visualizer" className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-[#00f3ff]/50 hover:bg-[#00f3ff]/5 transition-all duration-300">
+          <Link to="/visualizer" className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white hover:border-neon-cyan/50 hover:bg-neon-cyan/5 transition-all duration-300">
             <Play className="w-3.5 h-3.5" /> Open App
           </Link>
         </motion.div>
@@ -201,7 +204,8 @@ const LandingPage: React.FC = () => {
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#00f3ff]/20 bg-[#00f3ff]/5 text-[#00f3ff] mb-8 backdrop-blur-sm shadow-[0_0_20px_rgba(0,243,255,0.1)] hover:border-[#00f3ff]/40 transition-colors cursor-default group"
+          className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-neon-cyan/20 bg-neon-cyan/5 text-neon-cyan mb-8 backdrop-blur-sm hover:border-neon-cyan/40 transition-colors cursor-default group"
+          style={{ boxShadow: '0 0 20px rgba(0,243,255,0.1)' }}
         >
           <Sparkles className="w-4 h-4 animate-pulse group-hover:scale-110 transition-transform" />
           <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase flex items-center gap-2">
@@ -221,10 +225,10 @@ const LandingPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
           >
-            <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.08)]">
+            <span className="block text-white" style={{ filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.08))' }}>
               See How Algorithms
             </span>
-            <span 
+            <span
               className="block mt-2 bg-clip-text text-transparent animate-gradient-x"
               style={{ backgroundImage: 'linear-gradient(90deg, #00f3ff, #7B61FF, #ff00ea, #00f3ff)', backgroundSize: '300% 100%' }}
             >
@@ -233,7 +237,7 @@ const LandingPage: React.FC = () => {
           </motion.h1>
 
           {/* Decorative glow behind heading */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#00f3ff] rounded-full blur-[120px] opacity-[0.04] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-neon-cyan rounded-full blur-[120px] opacity-[0.04] pointer-events-none" />
         </motion.div>
 
         {/* Sub-heading */}
@@ -245,8 +249,8 @@ const LandingPage: React.FC = () => {
         >
           Watch Bubble Sort, Quick Sort, Merge Sort and more come alive with
           <span className="text-white font-medium"> stunning animations</span>,
-          <span className="text-[#00f3ff] font-medium"> real-time stats</span>, and
-          <span className="text-[#9d00ff] font-medium"> side-by-side code</span>.
+          <span className="text-neon-cyan font-medium"> real-time stats</span>, and
+          <span className="text-neon-purple font-medium"> side-by-side code</span>.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -257,14 +261,19 @@ const LandingPage: React.FC = () => {
           className="flex flex-col sm:flex-row gap-4 relative z-10 w-full sm:w-auto mb-20"
         >
           <Link to="/visualizer" className="w-full sm:w-auto">
-            <button className="group relative w-full sm:w-auto px-10 py-4 bg-[#00f3ff] text-black font-bold text-lg rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,243,255,0.3)] hover:shadow-[0_0_80px_rgba(0,243,255,0.5)] transition-all duration-500 transform hover:scale-[1.03] inline-flex items-center justify-center gap-3">
-              <span className="absolute inset-0 bg-gradient-to-r from-[#00f3ff] via-white to-[#00f3ff] opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-gradient-x" />
+            <button
+              className="group relative w-full sm:w-auto px-10 py-4 bg-neon-cyan text-black font-bold text-lg rounded-2xl overflow-hidden transition-all duration-500 transform hover:scale-[1.03] inline-flex items-center justify-center gap-3"
+              style={{ boxShadow: '0 0 60px rgba(0,243,255,0.3)' }}
+              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 80px rgba(0,243,255,0.5)')}
+              onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 60px rgba(0,243,255,0.3)')}
+            >
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-gradient-x" style={{ background: 'linear-gradient(to right, #00f3ff, white, #00f3ff)' }} />
               <span className="relative z-10 flex items-center gap-2.5">
                 Start Visualizing <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
           </Link>
-          <a href="#features" className="px-10 py-4 rounded-2xl border border-white/10 bg-white/[0.03] text-white font-semibold text-lg hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto backdrop-blur-sm group">
+          <a href="#features" className="px-10 py-4 rounded-2xl border border-white/10 bg-white/3 text-white font-semibold text-lg hover:bg-white/6 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto backdrop-blur-sm group">
             Learn More <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
@@ -276,8 +285,11 @@ const LandingPage: React.FC = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="w-full max-w-4xl relative"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#00f3ff]/20 via-[#9d00ff]/20 to-[#ff00ea]/20 rounded-3xl blur-xl" />
-          <div className="relative glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
+          <div
+            className="absolute -inset-1 rounded-3xl blur-xl"
+            style={{ background: 'linear-gradient(to right, rgba(0,243,255,0.2), rgba(157,0,255,0.2), rgba(255,0,234,0.2))' }}
+          />
+          <div className="relative glass-panel rounded-3xl border border-white/10 overflow-hidden" style={{ boxShadow: '0 40px 100px rgba(0,0,0,0.8)' }}>
             {/* Mock Window Chrome */}
             <div className="flex items-center gap-2 px-5 py-3 bg-black/40 border-b border-white/5">
               <div className="flex gap-1.5">
@@ -313,7 +325,7 @@ const LandingPage: React.FC = () => {
       <section className="relative z-10 py-16 border-y border-white/5">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
           <CounterStat target={9} label="Algorithms" suffix="+" />
-          <CounterStat target={3} label="Viz Modes" suffix="" />
+          <CounterStat target={4} label="Viz Modes" suffix="" />
           <CounterStat target={1000} label="Max Elements" suffix="+" />
           <CounterStat target={100} label="Speed Levels" suffix="%" />
         </div>
@@ -329,10 +341,10 @@ const LandingPage: React.FC = () => {
             transition={{ duration: 0.7 }}
             className="text-center mb-16"
           >
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#00f3ff] mb-4 block">Features</span>
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-neon-cyan mb-4 block">Features</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
               Everything You Need to <br className="hidden md:block" />
-              <span 
+              <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: 'linear-gradient(to right, #00f3ff, #9d00ff)' }}
               >
@@ -351,8 +363,8 @@ const LandingPage: React.FC = () => {
             />
             <FeatureCard
               icon={<BarChart3 className="w-6 h-6" />}
-              title="Multiple Viz Modes"
-              description="Switch between Bar Chart, Scatter Plot, and Color Wheel views to see data from every angle."
+              title="4 Visualization Modes"
+              description="Bars, Scatter Plot, Color Wheel, and the new 2D Matrix mode — see data from every angle."
               color="#00f3ff"
               delay={0.1}
             />
@@ -411,8 +423,10 @@ const LandingPage: React.FC = () => {
           </p>
           <Link to="/visualizer">
             <button
-              className="group px-12 py-5 text-white font-bold text-xl rounded-2xl shadow-[0_0_60px_rgba(0,243,255,0.25)] hover:shadow-[0_0_100px_rgba(0,243,255,0.4)] transition-all duration-500 transform hover:scale-105 inline-flex items-center gap-3"
-              style={{ background: 'linear-gradient(to right, #00f3ff, #9d00ff)' }}
+              className="group px-12 py-5 text-white font-bold text-xl rounded-2xl transition-all duration-500 transform hover:scale-105 inline-flex items-center gap-3"
+              style={{ background: 'linear-gradient(to right, #00f3ff, #9d00ff)', boxShadow: '0 0 60px rgba(0,243,255,0.25)' }}
+              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 100px rgba(0,243,255,0.4)')}
+              onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 60px rgba(0,243,255,0.25)')}
             >
               Launch Visualizer <Play className="w-6 h-6 fill-current group-hover:scale-110 transition-transform" />
             </button>
@@ -430,9 +444,9 @@ const LandingPage: React.FC = () => {
 const StatBox = ({ label, value, color, isLive }: { label: string; value: string; color: string; isLive?: boolean }) => (
   <div className="glass-panel rounded-xl p-4 border border-white/5">
     <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-1">{label}</p>
-    <p className={`text-lg font-bold font-mono`} style={{ color }}>
+    <p className="text-lg font-bold font-mono" style={{ color }}>
       {value}
-      {isLive && <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00f3ff] ml-2 animate-pulse" />}
+      {isLive && <span className="inline-block w-1.5 h-1.5 rounded-full bg-neon-cyan ml-2 animate-pulse" />}
     </p>
   </div>
 );
@@ -458,7 +472,7 @@ const FeatureCard = ({ icon, title, description, color, delay }: {
     viewport={{ once: true, margin: '-50px' }}
     transition={{ duration: 0.6, delay }}
     whileHover={{ y: -6 }}
-    className="group relative p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 overflow-hidden"
+    className="group relative p-7 rounded-2xl bg-white/2 border border-white/6 hover:border-white/12 transition-all duration-500 overflow-hidden"
   >
     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
       style={{ background: `radial-gradient(ellipse at top left, ${color}33 0%, transparent 60%)` }}

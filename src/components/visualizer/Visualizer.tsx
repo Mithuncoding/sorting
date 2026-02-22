@@ -195,10 +195,10 @@ export const Visualizer: React.FC<{ isSecondary?: boolean }> = ({ isSecondary = 
       {isGodMode && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden animate-in fade-in duration-700">
            {/* Scanlines */}
-           <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-50" />
+           <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_2px,3px_100%] z-50" />
            {/* Pulse Glow */}
-           <div className="absolute inset-x-0 top-0 h-1 bg-[--color-neon-pink] shadow-[0_0_20px_var(--color-neon-pink)] animate-pulse shadow-lg" />
-           <div className="absolute inset-x-0 bottom-0 h-1 bg-[--color-neon-cyan] shadow-[0_0_20px_var(--color-neon-cyan)] animate-pulse shadow-lg" />
+           <div className="absolute inset-x-0 top-0 h-1 bg-[--color-neon-pink] shadow-[0_0_20px_var(--color-neon-pink)] animate-pulse" />
+           <div className="absolute inset-x-0 bottom-0 h-1 bg-[--color-neon-cyan] shadow-[0_0_20px_var(--color-neon-cyan)] animate-pulse" />
            {/* Random Glitch Particles (CSS only) */}
            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[--color-neon-purple]/10 blur-[100px] animate-pulse" />
            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-[--color-neon-cyan]/10 blur-[100px] animate-pulse delay-700" />

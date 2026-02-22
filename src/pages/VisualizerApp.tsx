@@ -39,7 +39,7 @@ function App() {
         <main className="flex-1 flex flex-col gap-4 md:gap-6 overflow-y-auto custom-scrollbar md:pr-2 order-1 md:order-2">
           
           {/* Top Visualization & Stats Area */}
-          <section className="flex-1 min-h-[500px] glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-2xl border border-white/5">
+          <section className="flex-1 min-h-[300px] md:min-h-[500px] glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-2xl border border-white/5">
              <div className="flex-1 relative flex flex-col md:flex-row">
                <div className={`flex-1 relative flex flex-col ${isRaceMode ? 'border-b md:border-b-0 md:border-r border-white/10' : ''}`}>
                  {isRaceMode && <div className="absolute top-2 left-4 text-xs font-bold text-[--color-neon-cyan] bg-black/50 px-2 py-1 rounded z-10">{algorithm}</div>}
